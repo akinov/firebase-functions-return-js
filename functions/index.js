@@ -1,8 +1,12 @@
 const functions = require('firebase-functions');
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+exports.hello = functions
+  .region('asia-northeast1')
+  .https.onRequest((request, response) => {
+    // Using query
+    const name = request.query.name || 'defaultName';
+    // Return alert js
+    response
+      .contentType('application/javascript; charset=utf-8')
+      .send(`alert('Hello ${name}')`);
+  });
